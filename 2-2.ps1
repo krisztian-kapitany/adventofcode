@@ -31,29 +31,19 @@ function step() {
 }
 
 $cluestr = gc "clue2.txt"
-
 $position = @{'x' = 0; 'y' = -2}
-
-
 
 foreach ($clue in $cluestr) {
 
   $clue -split '(?<=.)(?=.)' | foreach {
+
     Write-Verbose "Char: $_"
-
     $position = step -point $position -dir $_
-
   }
 
   Write-Host "Step: $($position.x) , $($position.y)"
 }
 
-
-
-Write-Host "$($point.x) , $($point.y)"
-Write-Host "direction= $direction"
-Write-Host "----------------------------"
-Write-Host "Distance: $([math]::abs($point.x) + [math]::abs($point.y))"
 
 
 
