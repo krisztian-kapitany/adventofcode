@@ -5,27 +5,14 @@ $cluestrs = gc "clue3.txt"
 $cnt = 0
 $good_order = @()
 
-for ($i = 0; $i -lt $cluestrs.Count; $i+=3) {
-    $sidelengths0 = @()
-     $cluestrs[$i] -split "\s+" | foreach { $sidelengths0 += [int]$_ }
+for ($i = 0; $i -lt 3; $i++) {
 
-    $sidelengths1 = @()
-     $cluestrs[$i+1] -split "\s+" | foreach { $sidelengths1 += [int]$_ }
+    $cluestrs | foreach {
+        $numbers = @()
+        $_ -split "\s+" | foreach { $numbers += [int]$_ }
 
-    $sidelengths2 = @()
-     $cluestrs[$i+2] -split "\s+" | foreach { $sidelengths2 += [int]$_ }
-
-    $good_order += $sidelengths0[1]
-    $good_order += $sidelengths1[1]
-    $good_order += $sidelengths2[1]
-
-    $good_order += $sidelengths0[2]
-    $good_order += $sidelengths1[2]
-    $good_order += $sidelengths2[2]
-
-    $good_order += $sidelengths0[3]
-    $good_order += $sidelengths1[3]
-    $good_order += $sidelengths2[3]
+        $good_order += $numbers[$i+1]
+    }
 }
 
 for ($i = 0; $i -lt $good_order.Count; $i+=3) {
