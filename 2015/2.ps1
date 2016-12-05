@@ -23,9 +23,7 @@ foreach($clue in $clues) {
   $wrap = 2 * ($smallest[0] + $smallest[1])
 
   $sum = $sum + $surface + $slack
-  $wrapsum = $wrapsum + $wrap + $volume
-
-  
+  $wrapsum = $wrapsum + $wrap + $volume 
 }
 
 Write-Host "Sum: $sum"
