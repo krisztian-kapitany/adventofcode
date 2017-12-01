@@ -1,4 +1,4 @@
-$clue = "ffykfhsq"
+$clue = "wtnhxymk"
 
 $md5 = new-object -TypeName System.Security.Cryptography.MD5CryptoServiceProvider
 $utf8 = new-object -TypeName System.Text.UTF8Encoding
