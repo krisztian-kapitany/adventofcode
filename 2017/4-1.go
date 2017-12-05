@@ -34,7 +34,6 @@ func sContains(s []string, e string) bool {
 		if si == e {
 			fmt.Printf("%s == %s \n", si, e)
 			return true
-
 		}
 	}
 	return false
