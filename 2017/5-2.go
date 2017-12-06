@@ -23,27 +23,28 @@ func readLines(path string) ([]int, error) {
 	return lines, scanner.Err()
 }
 
-func jump(next int, cnt *int, nums *[]int) int {
-
-	if next >= len(*nums) || next < 0 {
-		return 1
-	}
-
-	(*cnt)++
-	current := next
-	next += (*nums)[current]
-	(*nums)[current]++
-
-	jump(next, cnt, nums)
-
-	return 0
-}
-
 func main() {
 	var nums, _ = readLines("input5.txt")
 
 	cnt := 0
-	jump(0, &cnt, &nums)
+	current := 0
+	next := 0
+
+	for {
+		if next >= len(nums) || next < 0 {
+			break
+		}
+		cnt++
+
+		current = next
+		next += nums[current]
+
+		if nums[current] < 3 {
+			nums[current]++
+		} else {
+			nums[current]--
+		}
+	}
 
 	fmt.Print(cnt)
 
