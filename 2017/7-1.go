@@ -4,7 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
+
+type node struct {
+	name   string
+	weight string
+
+	leaves []string
+}
 
 func readLines(path string) ([]string, error) {
 	file, err := os.Open(path)
@@ -22,10 +30,33 @@ func readLines(path string) ([]string, error) {
 }
 
 func main() {
-	var lines, _ = readLines("input7.1.txt")
+	var lines, _ = readLines("input7.txt")
 
-	cnt := 0
+	clues := make(map[string]string)
 
-	fmt.Print(cnt)
+	for _, line := range lines {
+		if strings.Contains(line, " -> ") {
+			clues[line[:strings.Index(line, " (")]] = line[strings.Index(line, "> ")+2:]
+		}
+		continue
+	}
+
+	var invalidRoots []string
+	for root := range clues {
+		for _, leaves := range clues {
+			if strings.Contains(leaves, root) {
+				//fmt.Printf("Root: %s, Leaves: %s \n", root, leaves)
+
+				invalidRoots = append(invalidRoots, root)
+			}
+		}
+	}
+
+	for _, root := range invalidRoots {
+		delete(clues, root)
+	}
+
+	fmt.Println("The root node is:")
+	fmt.Println(clues)
 
 }
