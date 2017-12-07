@@ -51,7 +51,7 @@ func main() {
 	var bins []int
 	var cnt = 0
 
-	var states []string
+	states := make(map[string]int)
 
 	for _, r := range strings.Fields(input) {
 		ri, _ := strconv.Atoi(r)
@@ -60,15 +60,16 @@ func main() {
 
 	for {
 		cnt++
-		fmt.Println(bins)
-		states = append(states, gethash(bins))
 
+		if val, ok := states[gethash(bins)]; ok {
+			cnt -= val
+			break
+		}
+
+		states[gethash(bins)] = cnt
 		index, biggest := getbiggest(bins)
 		redist(&bins, biggest, index)
 
-		if containsS(states, gethash(bins)) {
-			break
-		}
 	}
 
 	fmt.Println("====================")
