@@ -200,6 +200,7 @@ func main() {
 	for _, r := range lastParent.leaves {
 		if r.name != lastNode.name {
 			equalNode = r
+			break
 		}
 	}
 	var diff = equalNode.weight - lastNode.weight
