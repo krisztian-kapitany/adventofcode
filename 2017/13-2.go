@@ -35,19 +35,21 @@ func main() {
 		var l, _ = strconv.Atoi(parts[0])
 		var sr, _ = strconv.Atoi(parts[1])
 
-		if l == 0 {
-			continue
-		}
 		inputs[l] = sr
 	}
 
-	var severity int
-	for layer, scanrange := range inputs {
-		if layer%((2*scanrange)-2) == 0 {
-			severity += layer * scanrange
+	for delay := 0; ; delay++ {
+		var boom = false
+		for layer, scanrange := range inputs {
+			if (layer+delay)%((2*scanrange)-2) == 0 {
+				boom = true
+				break
+			}
+		}
+
+		if !boom {
+			fmt.Println(delay)
+			break
 		}
 	}
-
-	fmt.Println(severity)
-
 }
