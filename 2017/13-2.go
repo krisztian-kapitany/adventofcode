@@ -23,11 +23,14 @@ func readLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
+type scanner struct {
+	layer  int
+	srange int
+}
+
 func main() {
 	var lines, _ = readLines("input13.txt")
-
-	//[layer]range
-	inputs := make(map[int]int)
+	var inputs []scanner
 
 	for _, line := range lines {
 		var parts = strings.Split(line, ": ")
@@ -35,13 +38,13 @@ func main() {
 		var l, _ = strconv.Atoi(parts[0])
 		var sr, _ = strconv.Atoi(parts[1])
 
-		inputs[l] = sr
+		inputs = append(inputs, scanner{l, sr})
 	}
 
 	for delay := 0; ; delay++ {
 		var boom = false
-		for layer, scanrange := range inputs {
-			if (layer+delay)%((2*scanrange)-2) == 0 {
+		for _, input := range inputs {
+			if (input.layer+delay)%((2*input.srange)-2) == 0 {
 				boom = true
 				break
 			}
