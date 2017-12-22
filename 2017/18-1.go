@@ -78,12 +78,8 @@ func main() {
 	}
 
 	var lastsound int
-	var finished = false
+mainloop:
 	for i := 0; ; {
-		if finished {
-			break
-		}
-
 		inst := instructions[i]
 
 		switch command := inst.command; command {
@@ -106,9 +102,8 @@ func main() {
 
 		case "rcv":
 			if registers[inst.target] != 0 {
-				finished = true
 				fmt.Println(lastsound)
-				break
+				break mainloop
 			}
 
 		case "jgz":
@@ -127,7 +122,7 @@ func main() {
 			}
 
 		default:
-			fmt.Printf("Unsupported command: %s. \n", command)
+			fmt.Printf("Unsupported command: \"%s\" \n", command)
 		}
 
 		i++
