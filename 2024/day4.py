@@ -14,7 +14,7 @@ directions = {
     'nw': (-1, -1)
 }
 
-def check_next(x, y, d, part):
+def check_next(x: int, y: int, d: tuple[int, int], part: str) -> bool:
     nx, ny = d
     nx += x
     ny += y
@@ -48,18 +48,18 @@ for ix, l in enumerate(xmass_matrix):
 print(xmass_count)
 
 # Part 2
-def is_mas(a, b):
+def is_mas(a: str, b: str):
     if a == 'M' and b == 'S':
         return True
     if a == 'S' and b == 'M':
         return True
     return False
 
-def get_cell(x, y, d):
+def get_cell(x: int, y: int, d: tuple[int,int]) -> str:
     nx, ny = d
-    return xmass_matrix[x+nx][y+ny]
+    return xmass_matrix[x+nx][y+ny] 
 
-def check_cross(x, y):
+def check_cross(x: int, y: int):
     a = get_cell(x, y, directions['nw'])
     b = get_cell(x, y, directions['se'])
 
